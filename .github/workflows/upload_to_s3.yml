@@ -1,0 +1,30 @@
+name: Upload Terraform Module to S3
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish Module to S3
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Make Artifact Directory
+        run: mkdir -p ./artifacts
+
+      - name: Zip Module Code
+        run: |
+          zip -r ./artifacts/terraform-shift-left-demo-module.zip . -x ".*" -x "*/\.*" -x "artifacts/"
+
+      - name: Sync to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: './artifacts'
+          DEST_DIR: 'terraform-shift-left-demo'
