@@ -52,10 +52,13 @@ A Terraform module to deploy a "Shift Left" environment and cloud-native applica
 | region | The name of the AWS region to use | `string` | `"us-east-1"` | no |
 | resource\_prefix | The prefix to use for resource names. | `string` | `"wiz-shift-left"` | no |
 | use\_wiz\_admission\_controller | n/a | `bool` | `false` | no |
-| wiz\_admission\_controller\_client\_id | n/a | `string` | `""` | no |
-| wiz\_admission\_controller\_client\_secret | n/a | `string` | `""` | no |
+| use\_wiz\_sensor | n/a | `bool` | `false` | no |
 | wiz\_admission\_controller\_mode | n/a | `string` | `"AUDIT"` | no |
 | wiz\_admission\_controller\_policies | n/a | `list(string)` | `[]` | no |
+| wiz\_k8s\_integration\_client\_id | n/a | `string` | `""` | no |
+| wiz\_k8s\_integration\_client\_secret | n/a | `string` | `""` | no |
+| wiz\_sensor\_pull\_password | n/a | `string` | `""` | no |
+| wiz\_sensor\_pull\_username | n/a | `string` | `""` | no |
 
 ## Outputs
 

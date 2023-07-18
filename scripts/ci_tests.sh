@@ -9,7 +9,9 @@ set -eou pipefail
 readonly project_name=terraform-shift-left-demo
 
 TEST_CASES=(
-  examples/default/
+  examples/default
+  examples/custom-adm-ctrl-mode
+  examples/custom-adm-ctrl-policy
 )
 
 log() {

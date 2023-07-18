@@ -21,11 +21,16 @@ module "eks_services" {
   k8s_endpoint       = module.eks_cluster.endpoint
   k8s_token          = module.eks_cluster.token
 
-  use_wiz_admission_controller           = var.use_wiz_admission_controller
-  wiz_admission_controller_client_id     = var.wiz_admission_controller_client_id
-  wiz_admission_controller_client_secret = var.wiz_admission_controller_client_secret
-  wiz_admission_controller_mode          = var.wiz_admission_controller_mode
-  wiz_admission_controller_policies      = var.wiz_admission_controller_policies
+  wiz_k8s_integration_client_id     = var.wiz_k8s_integration_client_id
+  wiz_k8s_integration_client_secret = var.wiz_k8s_integration_client_secret
+
+  use_wiz_admission_controller      = var.use_wiz_admission_controller
+  wiz_admission_controller_mode     = var.wiz_admission_controller_mode
+  wiz_admission_controller_policies = var.wiz_admission_controller_policies
+
+  use_wiz_sensor           = var.use_wiz_sensor
+  wiz_sensor_pull_username = var.wiz_sensor_pull_username
+  wiz_sensor_pull_password = var.wiz_sensor_pull_password
 
   depends_on = [module.eks_cluster]
 }

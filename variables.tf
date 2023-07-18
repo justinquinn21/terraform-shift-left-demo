@@ -62,16 +62,6 @@ variable "region" {
   default     = "us-east-1"
 }
 
-variable "wiz_admission_controller_client_id" {
-  type    = string
-  default = ""
-}
-
-variable "wiz_admission_controller_client_secret" {
-  type    = string
-  default = ""
-}
-
 variable "wiz_admission_controller_mode" {
   type    = string
   default = "AUDIT"
@@ -86,7 +76,32 @@ variable "wiz_admission_controller_policies" {
   default = []
 }
 
+variable "wiz_k8s_integration_client_id" {
+  type    = string
+  default = ""
+}
+
+variable "wiz_k8s_integration_client_secret" {
+  type    = string
+  default = ""
+}
+
+variable "wiz_sensor_pull_username" {
+  type    = string
+  default = ""
+}
+
+variable "wiz_sensor_pull_password" {
+  type    = string
+  default = ""
+}
+
 variable "use_wiz_admission_controller" {
+  type    = bool
+  default = false
+}
+
+variable "use_wiz_sensor" {
   type    = bool
   default = false
 }
