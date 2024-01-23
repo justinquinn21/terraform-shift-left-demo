@@ -42,6 +42,8 @@ resource "time_sleep" "argo_wait" {
 }
 
 resource "kubectl_manifest" "argo_cd_application" {
+  count = var.deploy_argocd_application ? 1 : 0
+
   yaml_body = <<-YAML
     apiVersion: argoproj.io/v1alpha1
     kind: Application
