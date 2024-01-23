@@ -25,7 +25,7 @@ variable "deploy_argocd_application" {
 variable "eks_cluster_version" {
   type        = string
   description = "A string representing the desired kubernetes version for the EKS cluster."
-  default     = "1.25"
+  default     = "1.29"
 }
 
 variable "git_repo_url" {
