@@ -26,76 +26,75 @@ resource "kubernetes_namespace" "wiz" {
   }
 }
 
-resource "helm_release" "wiz_k8s_integration" {
-  name       = "wiz-kubernetes-integration"
-  repository = "https://wiz-sec.github.io/charts/"
-  chart      = "wiz-kubernetes-integration"
-  namespace  = kubernetes_namespace.wiz.id
+resource "helm_release" "wiz_k8s_integration_argocd" {
+  name       = "wiz-k8s-argocd-application"
+  namespace  = kubernetes_namespace.argocd.id
+  repository = "https://bedag.github.io/helm-charts/"
+  chart      = "raw"
+  version    = "2.0.0"
+  values = [
+    <<-EOF
+    resources:
+      - apiVersion: argoproj.io/v1alpha1
+        kind: Application
+        metadata:
+          name: wiz-k8s-integration
+          namespace: ${kubernetes_namespace.argocd.id}
+          finalizers:
+          - resources-finalizer.argocd.argoproj.io
+        spec:
+          project: default
+          source:
+            repoURL: 'https://wiz-sec.github.io/charts'
+            targetRevision: 0.*
+            helm:
+              values: |+
+                global:
+                  wizApiToken:
+                    clientId: ${var.wiz_k8s_integration_client_id}
+                    clientToken: ${var.wiz_k8s_integration_client_secret}
 
-  // Global
-  set {
-    name  = "global.wizApiToken.clientId"
-    value = var.wiz_k8s_integration_client_id
-  }
-  set {
-    name  = "global.wizApiToken.clientToken"
-    value = var.wiz_k8s_integration_client_secret
-  }
+                wiz-admission-controller:
+                  enabled: ${var.use_wiz_admission_controller}
+                  webhook:
+                    errorEnforcementMethod: ${var.wiz_admission_controller_mode}
+                    policyEnforcementMethod: ${var.wiz_admission_controller_mode}
 
-  // K8s Connector
-  set {
-    name  = "wiz-kubernetes-connector.enabled"
-    value = true
-  }
-  set {
-    name  = "wiz-kubernetes-connector.broker.enabled"
-    value = false
-  }
-  set {
-    name  = "wiz-kubernetes-connector.autoCreateConnector.connectorName"
-    value = local.kubernetes_connector_name
-  }
-  set {
-    name  = "wiz-kubernetes-connector.autoCreateConnector.clusterFlavor"
-    value = "EKS"
-  }
-  set {
-    name  = "wiz-kubernetes-connector.autoCreateConnector.apiServerEndpoint"
-    value = var.k8s_endpoint
-  }
+                  opaWebhook:
+                    policies: ${jsonencode(var.wiz_admission_controller_policies)}
 
-  // Admission Controller
-  set {
-    name  = "wiz-admission-controller.enabled"
-    value = var.use_wiz_admission_controller
-  }
-  set {
-    name  = "wiz-admission-controller.opaWebhook.errorEnforcementMethod"
-    value = var.wiz_admission_controller_mode
-  }
-  set {
-    name  = "wiz-admission-controller.opaWebhook.policyEnforcementMethod"
-    value = var.wiz_admission_controller_mode
-  }
-  dynamic "set" {
-    for_each = var.wiz_admission_controller_policies
-    content {
-      name  = "wiz-admission-controller.opaWebhook.policies[${index(var.wiz_admission_controller_policies, set.value)}]"
-      value = set.value
-    }
-  }
+                wiz-kubernetes-connector:
+                  enabled: true
+                  broker:
+                    enabled: false
+                  autoCreateConnector:
+                    connectorName: ${local.kubernetes_connector_name}
+                    clusterFlavor: EKS
+                    apiServerEndpoint: ${var.k8s_endpoint}
 
-  // Sensor
-  set {
-    name  = "wiz-sensor.enabled"
-    value = var.use_wiz_sensor
-  }
-  set {
-    name  = "wiz-sensor.imagePullSecret.username"
-    value = var.wiz_sensor_pull_username
-  }
-  set {
-    name  = "wiz-sensor.imagePullSecret.password"
-    value = var.wiz_sensor_pull_password
-  }
+                wiz-sensor:
+                  enabled: ${var.use_wiz_sensor}
+                  imagePullSecret:
+                    username: ${var.wiz_sensor_pull_username}
+                    password: ${var.wiz_sensor_pull_password}
+
+            chart: wiz-kubernetes-integration
+          destination:
+            server: 'https://kubernetes.default.svc'
+            namespace: ${kubernetes_namespace.wiz.id}
+          syncPolicy:
+            automated:
+              prune: true
+              selfHeal: true
+            syncOptions:
+              - PruneLast=true
+              - RespectIgnoreDifferences=true
+              - ServerSideApply=true
+              - CreateNamespace=true
+    EOF
+  ]
+
+  depends_on = [
+    helm_release.argocd
+  ]
 }
