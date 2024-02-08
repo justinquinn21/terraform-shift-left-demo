@@ -20,8 +20,8 @@ jobs:
 
       - name: Zip Module Code
         run: |
-          zip -r ./artifacts/terraform-shift-left-demo-module.zip . -x ".*" -x "*/\.*" -x "artifacts/"
-          zip -r ./artifacts/terraform-shift-left-demo-module-${{ steps.version.outputs.tag }}.zip . -x ".*" -x "*/\.*" -x "artifacts/"
+          zip -r ./artifacts/terraform-shift-left-demo-module.zip . -x ".*" -x "*/\.*" -x "artifacts/*"
+          zip -r ./artifacts/terraform-shift-left-demo-module-${{ steps.version.outputs.tag }}.zip . -x ".*" -x "*/\.*" -x "artifacts/*"
 
       - name: Sync to S3
         uses: jakejarvis/s3-sync-action@master
