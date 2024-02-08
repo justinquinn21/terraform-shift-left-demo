@@ -1,3 +1,8 @@
+variable "access_entries" {
+  description = "Map of access entries to add to the cluster"
+  type        = any
+}
+
 variable "cluster_version" {
   type        = string
   description = "The version of Kubernetes to run for the EKS cluster."
@@ -9,24 +14,9 @@ variable "cluster_wait" {
   default     = "60s"
 }
 
-variable "mapped_roles" {
-  description = "Additional IAM roles to add to the aws-auth configmap."
-  type = list(object({
-    rolearn  = string
-    username = string
-    groups   = list(string)
-  }))
-  default = []
-}
-
-variable "mapped_users" {
-  description = "Additional IAM users to add to the aws-auth configmap."
-  type = list(object({
-    userarn  = string
-    username = string
-    groups   = list(string)
-  }))
-  default = []
+variable "karpenter_chart_verison" {
+  type        = string
+  description = "A string representing the version of the Karpenter Helm chart to deploy."
 }
 
 variable "region" {

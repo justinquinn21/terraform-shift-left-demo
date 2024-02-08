@@ -1,3 +1,9 @@
+variable "access_entries" {
+  type        = any
+  description = "A map representing access entries to add to the EKS cluster."
+  default     = {}
+}
+
 variable "argocd_application_name" {
   type        = string
   description = "A string representing the ArgoCD application name. (Required if `deploy_argocd_application` is `true`)"
@@ -40,24 +46,10 @@ variable "git_repo_manifest_path" {
   default     = ""
 }
 
-variable "mapped_roles" {
-  description = "A list of objects representing additional IAM roles to add to the aws-auth configmap."
-  type = list(object({
-    rolearn  = string
-    username = string
-    groups   = list(string)
-  }))
-  default = []
-}
-
-variable "mappped_users" {
-  description = "A list of objects representing additional IAM users to add to the aws-auth configmap."
-  type = list(object({
-    userarn  = string
-    username = string
-    groups   = list(string)
-  }))
-  default = []
+variable "karpenter_chart_verison" {
+  type        = string
+  description = "A string representing the version of the Karpenter Helm chart to deploy."
+  default     = "v0.33.1"
 }
 
 variable "resource_prefix" {

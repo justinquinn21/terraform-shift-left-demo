@@ -1,10 +1,14 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 19.0"
+  version = "~> 20.0"
 
   cluster_name                   = local.cluster_name
   cluster_version                = local.cluster_version
   cluster_endpoint_public_access = true
+
+  enable_cluster_creator_admin_permissions = true
+
+  access_entries = var.access_entries
 
   cluster_addons = {
     kube-proxy = {}
@@ -43,23 +47,6 @@ module "eks" {
   # Fargate profiles use the cluster primary security group so these are not utilized
   create_cluster_security_group = false
   create_node_security_group    = false
-
-  manage_aws_auth_configmap = true
-  aws_auth_roles = distinct(concat(
-    [
-      {
-        rolearn  = module.karpenter.role_arn
-        username = "system:node:{{EC2PrivateDNSName}}"
-        groups = [
-          "system:bootstrappers",
-          "system:nodes",
-        ]
-      }
-    ],
-    var.mapped_roles
-    )
-  )
-  aws_auth_users = var.mapped_users
 
   fargate_profiles = {
     karpenter = {

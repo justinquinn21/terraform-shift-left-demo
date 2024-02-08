@@ -5,11 +5,11 @@ module "eks_cluster" {
     aws.us-east-1 = aws.us-east-1
   }
 
-  cluster_version = var.eks_cluster_version
-  mapped_roles    = var.mapped_roles
-  mapped_users    = var.mappped_users
-  region          = var.region
-  resource_prefix = var.resource_prefix
+  access_entries          = var.access_entries
+  cluster_version         = var.eks_cluster_version
+  karpenter_chart_verison = var.karpenter_chart_verison
+  region                  = var.region
+  resource_prefix         = var.resource_prefix
 }
 
 module "eks_services" {
