@@ -117,6 +117,12 @@ variable "use_wiz_admission_controller" {
   default     = false
 }
 
+variable "use_wiz_k8s_audit_logs" {
+  type        = bool
+  description = "A boolean representing whether or not to deploy the Wiz Kubernetes Audit Log proxy in the EKS cluster."
+  default     = false
+}
+
 variable "use_wiz_sensor" {
   type        = bool
   description = "A boolean representing whether or not to deploy the Wiz Sensor in the EKS cluster."

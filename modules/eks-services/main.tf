@@ -63,6 +63,9 @@ resource "helm_release" "wiz_k8s_integration_argocd" {
                   opaWebhook:
                     policies: ${jsonencode(var.wiz_admission_controller_policies)}
 
+                  kubernetesAuditLogsWebhook:
+                    enabled: ${var.use_wiz_k8s_audit_logs}
+
                 wiz-kubernetes-connector:
                   enabled: true
                   broker:

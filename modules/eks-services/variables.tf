@@ -68,6 +68,11 @@ variable "use_wiz_admission_controller" {
   default = false
 }
 
+variable "use_wiz_k8s_audit_logs" {
+  type    = bool
+  default = false
+}
+
 variable "use_wiz_sensor" {
   type    = bool
   default = false
