@@ -3,6 +3,12 @@ variable "access_entries" {
   type        = any
 }
 
+variable "cluster_admins" {
+  type        = list(string)
+  description = "A list containing the ARNs of users/roles that should be cluster administrators."
+  default     = []
+}
+
 variable "cluster_version" {
   type        = string
   description = "The version of Kubernetes to run for the EKS cluster."

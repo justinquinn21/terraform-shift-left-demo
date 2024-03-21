@@ -28,6 +28,12 @@ variable "deploy_argocd_application" {
   default     = true
 }
 
+variable "eks_cluster_admins" {
+  type        = list(string)
+  description = "A list containing the ARNs of users/roles that should be cluster administrators."
+  default     = []
+}
+
 variable "eks_cluster_version" {
   type        = string
   description = "A string representing the desired kubernetes version for the EKS cluster."

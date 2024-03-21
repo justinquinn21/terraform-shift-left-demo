@@ -6,6 +6,7 @@ module "eks_cluster" {
   }
 
   access_entries          = var.access_entries
+  cluster_admins          = var.eks_cluster_admins
   cluster_version         = var.eks_cluster_version
   karpenter_chart_verison = var.karpenter_chart_verison
   region                  = var.region

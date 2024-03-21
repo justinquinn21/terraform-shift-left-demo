@@ -6,13 +6,9 @@ module "eks" {
   cluster_version                = local.cluster_version
   cluster_endpoint_public_access = true
 
-  enable_cluster_creator_admin_permissions = true
-
-  access_entries = var.access_entries
+  access_entries = merge(local.cluster_admin_access_entries, var.access_entries)
 
   cluster_addons = {
-    kube-proxy = {}
-    vpc-cni    = {}
     coredns = {
       configuration_values = jsonencode({
         computeType = "Fargate"
@@ -37,8 +33,17 @@ module "eks" {
           }
         }
       })
+      most_recent = true
+    }
+    kube-proxy = {
+      most_recent = true
+    }
+    vpc-cni = {
+      most_recent = true
     }
   }
+
+  kms_key_administrators = var.cluster_admins
 
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets
