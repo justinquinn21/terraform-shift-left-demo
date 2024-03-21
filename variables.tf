@@ -55,7 +55,7 @@ variable "git_repo_manifest_path" {
 variable "karpenter_chart_verison" {
   type        = string
   description = "A string representing the version of the Karpenter Helm chart to deploy."
-  default     = "v0.33.1"
+  default     = "0.35.2"
 }
 
 variable "resource_prefix" {
