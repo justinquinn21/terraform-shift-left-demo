@@ -43,7 +43,7 @@ module "eks" {
     }
   }
 
-  kms_key_administrators = var.cluster_admins
+  kms_key_administrators = local.cluster_admins
 
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets
