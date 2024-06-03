@@ -12,15 +12,16 @@ A Terraform module to deploy a "Shift Left" environment and cloud-native applica
 | helm | >= 2.7 |
 | kubectl | >= 2.0 |
 | kubernetes | >= 2.10 |
-| time | ~> 0.10.0 |
+| time | >= 0.10 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
+| aws | >= 4.47 |
 | kubectl | >= 2.0 |
 | kubernetes | >= 2.10 |
-| time | ~> 0.10.0 |
+| time | >= 0.10 |
 
 ## Modules
 
@@ -35,6 +36,7 @@ A Terraform module to deploy a "Shift Left" environment and cloud-native applica
 |------|------|
 | [kubectl_manifest.argo_cd_application](https://registry.terraform.io/providers/alekc/kubectl/latest/docs/resources/manifest) | resource |
 | [time_sleep.argo_wait](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 | [kubernetes_secret_v1.argocd_password](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret_v1) | data source |
 | [kubernetes_service.argocd_service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service) | data source |
 
