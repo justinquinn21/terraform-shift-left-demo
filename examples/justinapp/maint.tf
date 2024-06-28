@@ -1,10 +1,10 @@
 module "default_shift_left_environment" {
   source = "../../"
 
-  argocd_application_name      = "guestbook"
-  argocd_application_namespace = "guestbook"
-  git_repo_url                 = "https://github.com/argoproj/argocd-example-apps.git"
-  git_repo_manifest_path       = "guestbook"
+  argocd_application_name      = "nix-foundation"
+  argocd_application_namespace = "nix-foundation"
+  git_repo_url                 = "https://github.com/justinquinn21/sample_CI-CD.git"
+  git_repo_manifest_path       = "manifests"
 
   wiz_k8s_integration_client_id     = "<WIZ_K8S_INTEGRATION_CLIENT_ID>"
   wiz_k8s_integration_client_secret = "<WIZ_K8S_INTEGRATION_CLIENT_PASSWORD>"

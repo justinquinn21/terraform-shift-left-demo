@@ -6,6 +6,9 @@ resource "kubernetes_namespace" "argocd" {
   metadata {
     name = "argocd"
   }
+  timeouts {
+    delete = "30m"
+  }
 }
 
 resource "helm_release" "argocd" {
