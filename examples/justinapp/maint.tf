@@ -6,14 +6,14 @@ module "default_shift_left_environment" {
   git_repo_url                 = "https://github.com/justinquinn21/sample_CI-CD.git"
   git_repo_manifest_path       = "manifests"
 
-  wiz_k8s_integration_client_id     = "<WIZ_K8S_INTEGRATION_CLIENT_ID>"
-  wiz_k8s_integration_client_secret = "<WIZ_K8S_INTEGRATION_CLIENT_PASSWORD>"
+  wiz_k8s_integration_client_id     = "wgxq75hrlndpbktx3eupevf2xywdbs7llunfy6u4zub24qwebkdwm"
+  wiz_k8s_integration_client_secret = "85U2vFJoiguXcUd6MWPBRepNUPKBckYmhW7TTo8FJYY3whB9QvHYHzsoys1BnoR5"
 
   use_wiz_admission_controller = true
 
   use_wiz_sensor           = true
-  wiz_sensor_pull_username = "<WIZ_SENSOR_REGISTRY_USERNAME>"
-  wiz_sensor_pull_password = "<WIZ_SENSOR_REGISTRY_PASSWORD>"
+  wiz_sensor_pull_username = "wizio-repo-b1af0ff4-f15b-46f0-aa77-d928f254babe"
+  wiz_sensor_pull_password = "1mKRv3oL/kIMWl+ygFJBWvpc6ch50owxKS9satjfZd+ACRAkz79n"
 }
 
 output "shift_left_environment_output" {
