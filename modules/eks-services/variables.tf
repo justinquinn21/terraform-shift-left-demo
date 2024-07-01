@@ -16,7 +16,7 @@ variable "k8s_token" {
 variable "resource_prefix" {
   type        = string
   description = "The prefix to use for resource names."
-  default     = "justinquinn-shift-left"
+  default     = "quinn-shift-left"
 }
 
 variable "wiz_service_account_name" {

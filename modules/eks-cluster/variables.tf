@@ -32,7 +32,7 @@ variable "region" {
 variable "resource_prefix" {
   type        = string
   description = "The prefix to use for resource names."
-  default     = "justinquinn-shift-left"
+  default     = "quinn-shift-left"
 }
 
 variable "tags" {
