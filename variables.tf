@@ -61,7 +61,7 @@ variable "karpenter_chart_verison" {
 variable "resource_prefix" {
   type        = string
   description = "A string representing the prefix to use for resource names."
-  default     = "wiz-shift-left"
+  default     = "justinquinn-shift-left"
 }
 
 variable "region" {

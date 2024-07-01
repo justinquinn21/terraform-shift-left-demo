@@ -1,8 +1,8 @@
 module "default_shift_left_environment" {
   source = "../../"
 
-  argocd_application_name      = "nix-foundation"
-  argocd_application_namespace = "nix-foundation"
+  argocd_application_name      = "mighty-quinn"
+  argocd_application_namespace = "mighty-quinn"
   git_repo_url                 = "https://github.com/justinquinn21/sample_CI-CD.git"
   git_repo_manifest_path       = "manifests"
 
@@ -13,6 +13,7 @@ module "default_shift_left_environment" {
   wiz_admission_controller_mode = "AUDIT"
   wiz_admission_controller_policies = ["JustinQuinnACPolicy"]
 
+  use_wiz_k8s_audit_logs = true
 
   use_wiz_sensor           = true
   wiz_sensor_pull_username = "wizio-repo-b1af0ff4-f15b-46f0-aa77-d928f254babe"
