@@ -10,6 +10,9 @@ module "default_shift_left_environment" {
   wiz_k8s_integration_client_secret = "85U2vFJoiguXcUd6MWPBRepNUPKBckYmhW7TTo8FJYY3whB9QvHYHzsoys1BnoR5"
 
   use_wiz_admission_controller = true
+  wiz_admission_controller_mode = "AUDIT"
+  wiz_admission_controller_policies = ["JustinQuinnACPolicy"]
+
 
   use_wiz_sensor           = true
   wiz_sensor_pull_username = "wizio-repo-b1af0ff4-f15b-46f0-aa77-d928f254babe"
