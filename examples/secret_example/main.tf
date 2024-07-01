@@ -15,6 +15,8 @@ module "default_shift_left_environment" {
   wiz_sensor_pull_username = "<WIZ_SENSOR_REGISTRY_USERNAME>"
   wiz_sensor_pull_password = "<WIZ_SENSOR_REGISTRY_PASSWORD>"
 
+### Added Secret
+
   aws_access_key_id = "AKIA6KJQR5EGTCVYCLKT"
   aws_secret_access_key = "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"
 }
