@@ -60,6 +60,7 @@ resource "helm_release" "wiz_k8s_integration_argocd" {
                 wiz-admission-controller:
                   enabled: ${var.use_wiz_admission_controller}
                   webhook:
+                    createSelfSignedCert: true
                     errorEnforcementMethod: ${var.wiz_admission_controller_mode}
                     policyEnforcementMethod: ${var.wiz_admission_controller_mode}
 
