@@ -77,5 +77,3 @@ resource "kubectl_manifest" "argo_cd_application" {
     time_sleep.argo_wait
   ]
 }
-
-///this is a test
